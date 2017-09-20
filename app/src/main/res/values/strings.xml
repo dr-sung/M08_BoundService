@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">M08_BoundService</string>
+    <string name="start_button">Start the Service</string>
+</resources>
