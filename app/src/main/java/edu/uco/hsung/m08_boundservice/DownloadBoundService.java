@@ -32,7 +32,8 @@ public class DownloadBoundService extends Service {
 
                     Message response = Message.obtain(null, DOWNLOAD_RESPONSE);
                     Bundle bundleResponse = new Bundle();
-                    bundleResponse.putString("ResponseData", filename+new java.util.Date());
+                    bundleResponse.putString("ResponseData",
+                            filename+": download complete at " +new java.util.Date());
                     response.setData(bundleResponse);
 
                     try {

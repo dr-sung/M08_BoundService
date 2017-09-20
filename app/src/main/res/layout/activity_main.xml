@@ -6,11 +6,14 @@
 
     <TextView
         android:id="@+id/display"
+        android:text="@string/message"
+        android:textSize="24sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/button"
+        android:textSize="24sp"
         android:text="@string/start_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

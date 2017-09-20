@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                display.setText("Download started....");
                 Message msg = Message.obtain(null, DownloadBoundService.DOWNLOAD);
                 msg.replyTo = new Messenger(new ResponseHandler());
                 Bundle b = new Bundle();
