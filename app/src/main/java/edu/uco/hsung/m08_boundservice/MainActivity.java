@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
     private ServiceConnection serviceConnection;
     private Messenger messenger;
     private TextView display;
+    private TextView timeDisplay;
 
     class ResponseHandler extends Handler {
         @Override
@@ -36,7 +37,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         display = (TextView) findViewById(R.id.display);
+        timeDisplay = (TextView) findViewById(R.id.time_display);
+        
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +60,14 @@ public class MainActivity extends Activity {
             }
         });
 
+        Button timeButton = (Button) findViewById(R.id.time_button);
+        timeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timeDisplay.setText("Current time: " + new java.util.Date());
+            }
+        });
+
         serviceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
@@ -72,4 +84,5 @@ public class MainActivity extends Activity {
         bindService(new Intent(this, DownloadBoundService.class), serviceConnection,
                 Context.BIND_AUTO_CREATE);
     }
+
 }
