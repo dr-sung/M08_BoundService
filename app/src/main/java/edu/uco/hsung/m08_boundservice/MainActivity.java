@@ -21,6 +21,7 @@ public class MainActivity extends Activity {
     private Messenger messenger;
     private TextView display;
     private TextView timeDisplay;
+    private boolean bound;
 
     class ResponseHandler extends Handler {
         @Override
@@ -72,17 +73,34 @@ public class MainActivity extends Activity {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 messenger = new Messenger(service);
+                bound = true;
             }
 
             @Override
             public void onServiceDisconnected(ComponentName name) {
                 messenger = null;
+                bound = false;
             }
         };
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         // bind to the service
         bindService(new Intent(this, DownloadBoundService.class), serviceConnection,
                 Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // Unbind from the service
+        if (bound) {
+            unbindService(serviceConnection);
+            bound = false;
+        }
     }
 
 }

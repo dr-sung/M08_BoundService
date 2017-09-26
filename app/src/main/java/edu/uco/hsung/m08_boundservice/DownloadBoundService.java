@@ -15,22 +15,18 @@ public class DownloadBoundService extends Service {
 
     public final static int DOWNLOAD = 1;
     public final static int DOWNLOAD_RESPONSE = 2;
-
     private Handler serviceHandler;
     private Messenger messenger;
 
     @Override
     public void onCreate() {
-
         HandlerThread thread = new HandlerThread("ServiceStartArguments",
                 Process.THREAD_PRIORITY_BACKGROUND);
         thread.start();
 
         serviceHandler = new Handler(thread.getLooper()) {
-
             @Override
             public void handleMessage(Message msg) {
-
                 switch (msg.what) {
                     case DOWNLOAD:
                         // incoming data
